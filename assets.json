@@ -1,0 +1,11 @@
+{
+  "main": {
+    "css": {
+    },
+    "js": {
+        "client": [
+        "client/app.js"
+      ]
+    }
+  }
+}
