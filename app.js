@@ -53,7 +53,7 @@ if (app.get('env') === 'development') {
 }
 
 if(app.get('env') === 'development'){
-    mongoose.connect('mongodb://localhost/superheros');
+    //mongoose.connect('mongodb://localhost/superheros');
 }
 
 mongoose.connect('mongodb://rudolfoborges:1234@ds035270.mongolab.com:35270/superheros');
@@ -76,6 +76,14 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+var debug = require('debug')('myApp');
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
 });
 
 module.exports = app;
