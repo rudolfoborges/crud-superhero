@@ -53,7 +53,6 @@ if (app.get('env') === 'development') {
 }
 
 if(app.get('env') === 'development'){
-    
     mongoose.connect('mongodb://localhost/superheros');
 }
 
