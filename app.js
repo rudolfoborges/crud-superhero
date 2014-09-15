@@ -56,8 +56,10 @@ if(app.get('env') === 'development'){
     mongoose.connect('mongodb://localhost/superheros');
 }
 
+mongoose.connect('mongodb://rudolfoborges:1234@ds035270.mongolab.com:35270/superheros');
+
 if(app.get('env') === 'production'){
-    mongoose.connect('mongodb://rudolfoborges:1234@ds035270.mongolab.com:35270/superheros');
+    //mongoose.connect('mongodb://rudolfoborges:1234@ds035270.mongolab.com:35270/superheros');
 }
 
 //load all files in models dir
