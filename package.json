@@ -17,6 +17,7 @@
     "jade": "~1.6.0",
     "assetmanager": "^1.1.1",
     "mongoose": "^3.8.16",
-    "connect-mongo": "^0.4.1"
+    "connect-mongo": "^0.4.1",
+    "lodash": "^2.4.1"
   }
 }

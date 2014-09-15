@@ -7,8 +7,8 @@
 		<thead>
 	        <tr>
 	          <th>Name</th>
-	          <th>Power</th>
-	          <th>#</th>
+	          <th>Superpower</th>
+	          <th></th>
 	        </tr>
       	</thead>
       	<tbody>
@@ -16,8 +16,8 @@
       			<td>{{superhero.name}}</td>
       			<td>{{superhero.superpower}}</td>
       			<td>
-      				<a href="#">Editar</a> |
-      				<a ng-click="destroy(superhero)">Excluir</a>
+      				<a href="#/superheros/edit/{{superhero._id}}">Editar</a> |
+      				<a onclick="javascript:return confirm('Are you absolutely sure you want to delete?')" ng-click="destroy(superhero)">Excluir</a>
       			</td>
       		</tr>
       	</tbody>

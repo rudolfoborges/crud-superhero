@@ -1,45 +1,53 @@
-myApp.controller('SuperheroController', ['$scope', 'Superhero', function($scope, Superhero){
+myApp.controller('SuperheroController', ['$scope', '$location', '$routeParams', 'SuperheroService',
+		 function($scope, $location, $routeParams, service){
 
 	$scope.find = function(){
-		$scope.superheros = Superhero.query(function(superheros){
+		$scope.superheros = service.query(function(superheros){
 			$scope.superheros = superheros;	
 		});
 	}
 
-	$scope.save = function(superhero){
-		if(superhero._id){
-			$scope.update(superhero);
+	$scope.show = function(){
+		if($routeParams.id){
+			$scope.superhero = service.get({superheroId: $routeParams.id});
+		}	
+	}
+
+	$scope.save = function(){
+		if($scope.superhero._id){
+			$scope.update();
 		} else {
-			$scope.create(superhero);
+			$scope.create();
 		}
 	}
 
-	$scope.create = function(superhero){
-		var model = new Superhero({
-			name: superhero.name,
-			superpower: superhero.superpower
-		});
-		model.$save(function(res){
+	$scope.create = function(){
+		var model = {
+			name: $scope.superhero.name,
+			superpower: $scope.superhero.superpower
+		};
+		service.save(model, function(res){
 
 		});
 
 		$scope.superhero = '';
 	}	
 
-	$scope.update = function(superhero){
-
+	$scope.update = function(){
+		var superhero = $scope.superhero;
+		superhero.$update(function(){
+			$location.path('superheros');
+		});
 	}
 
 	$scope.destroy = function(superhero){
-		if(superhero){
-			superhero.$remove();
-
+		superhero.$remove(function(){
 			for(var i in $scope.superheros){
 				if($scope.superheros[i] === superhero){
 					$scope.superheros.splice(i, 1);
 				}
 			}
-		}
+		});
 	}
 
 }]);

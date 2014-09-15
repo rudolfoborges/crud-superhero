@@ -2,6 +2,7 @@ var model = require('../models/superhero');
 
 var mongoose = require('mongoose');
 var Superhero = mongoose.model('superhero');
+_ = require('lodash');
 
 /**
  * Find article by id
@@ -23,7 +24,7 @@ exports.find = function(req, res){
 };
 
 exports.show = function(req, res){
-	res.send('Hello World ' + req.params.id);
+	res.json(req.superhero);
 };
 
 exports.create = function(req, res){
@@ -39,7 +40,17 @@ exports.create = function(req, res){
 };
 
 exports.update = function(req, res){
+	var superhero = req.superhero;
+ 	superhero = _.extend(superhero, req.body);
 
+ 	superhero.save(function(err) {
+    	if (err) {
+      		return res.json(500, {
+        	error: 'Cannot update the article'
+      	});
+    }
+    res.json(superhero);
+  });
 };
 
 exports.destroy = function(req, res){
